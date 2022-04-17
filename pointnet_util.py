@@ -7,11 +7,11 @@ sys.path.append('/workspace/SOE-Net/tf_ops/grouping')
 sys.path.append('/workspace/SOE-Net/tf_ops/3d_interpolation')
 sys.path.append('/workspace/SOE-Net/tf_ops/pointSIFT_op')
 sys.path.append(BASE_DIR)
-sys.path.append(os.path.join(ROOT_DIR, 'utils'))
-sys.path.append(os.path.join(ROOT_DIR, 'tf_ops/sampling'))
-sys.path.append(os.path.join(ROOT_DIR, 'tf_ops/grouping'))
-sys.path.append(os.path.join(ROOT_DIR, 'tf_ops/3d_interpolation'))
-sys.path.append(os.path.join(ROOT_DIR, 'tf_ops/pointSIFT_op'))
+sys.path.append(os.path.join(BASE_DIR, 'utils'))
+sys.path.append(os.path.join(BASE_DIR, 'tf_ops/sampling'))
+sys.path.append(os.path.join(BASE_DIR, 'tf_ops/grouping'))
+sys.path.append(os.path.join(BASE_DIR, 'tf_ops/3d_interpolation'))
+sys.path.append(os.path.join(BASE_DIR, 'tf_ops/pointSIFT_op'))
 from pointSIFT_op import pointSIFT_select, pointSIFT_select_four
 from tf_sampling import farthest_point_sample, gather_point
 from tf_grouping import query_ball_point, group_point, knn_point
