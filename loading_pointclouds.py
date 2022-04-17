@@ -4,6 +4,7 @@ import numpy as np
 import random
 
 BASE_PATH = "/home/xiayan/benchmark_datasets/"
+BASE_PATH=os.path.join(BASE_DIR, '../datasets/frame_5m_without_ground')
 print(BASE_PATH)
 
 def get_queries_dict(filename):
