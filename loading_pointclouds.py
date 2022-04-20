@@ -4,6 +4,7 @@ import numpy as np
 import random
 
 BASE_PATH = "/home/xiayan/benchmark_datasets/"
+BASE_DIR  = os.path.dirname(os.path.realpath(__file__))
 BASE_PATH=os.path.join(BASE_DIR, '../datasets/frame_5m_without_ground')
 print(BASE_PATH)
 
