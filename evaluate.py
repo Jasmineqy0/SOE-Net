@@ -42,17 +42,20 @@ DECAY_STEP = FLAGS.decay_step
 DECAY_RATE = FLAGS.decay_rate
 model_file = FLAGS.model_file
 dataset = FLAGS.dataset
+dataset = 'tum'
 LOG_DIR = FLAGS.logdir
 
 if not os.path.exists(RESULTS_FOLDER): os.mkdir(RESULTS_FOLDER)
 
 NUMBER_NEIBORS = 25
 
-DATABASE_FILE= os.path.join(os.path.dirname(BASE_DIR), 'datasets/pickles/python3.6/tum_evaluation_frame_5m_database.pickle')
-QUERY_FILE= os.path.join(os.path.dirname(BASE_DIR), 'datasets/pickles/python3.6/tum_evaluation_frame_5m_query.pickle')
+model_type = 'train'
+dist = '5m'
+DATABASE_FILE= os.path.join(os.path.dirname(BASE_DIR), f'datasets/pickles/python3.6/tum_evaluation_frame_{dist}_database.pickle')
+QUERY_FILE= os.path.join(os.path.dirname(BASE_DIR), f'datasets/pickles/python3.6/tum_evaluation_frame_{dist}_query.pickle')
 
 
-output_file= RESULTS_FOLDER +'baseline_results_'+dataset+'_'+model_file+'.txt'
+output_file= RESULTS_FOLDER + f'{model_type}_tum_evaluation_frame_{dist}.txt'
 # output_file= RESULTS_FOLDER +'refinement_results_'+dataset+'_'+model_file+'.txt'
 
 DATABASE_SETS= get_sets_dict(DATABASE_FILE)

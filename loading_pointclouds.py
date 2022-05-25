@@ -5,7 +5,7 @@ import random
 
 BASE_PATH = "/home/xiayan/benchmark_datasets/"
 BASE_DIR  = os.path.dirname(os.path.realpath(__file__))
-BASE_PATH=os.path.join(BASE_DIR, '../datasets/frame_5m_without_ground')
+BASE_PATH=os.path.join(BASE_DIR, '../datasets/frame_5m')
 print(BASE_PATH)
 
 def get_queries_dict(filename):
@@ -31,6 +31,11 @@ def load_pc_file(filename):
 		return np.array([])
 
 	pc=np.reshape(pc,(pc.shape[0]//3,3))
+	max = np.max(pc)
+	min = np.min(pc)
+	range = max - min
+	pc = 2 * (pc - min) / range - 1
+	assert np.all(pc <= 1) and np.all(pc >= -1) and np.any(pc < 0)
 	return pc
 
 def load_pc_files(filenames):

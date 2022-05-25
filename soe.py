@@ -26,6 +26,45 @@ def forward(point_cloud, is_training, bn_decay=None):
 
     point_cloud_xyz = point_cloud
 
+    # ###################### Way 3: change PointOE Module to Original PointNet##########################
+    # with tf.variable_scope('transform_net1') as sc:
+    #     input_transform = input_transform_net(point_cloud, is_training, bn_decay, K=3)
+    # point_cloud_transformed = tf.matmul(point_cloud, input_transform)
+    # input_image = tf.expand_dims(point_cloud_transformed, -1)
+
+    # net = tf_util.conv2d(input_image, 64, [1,3],
+    #                      padding='VALID', stride=[1,1],
+    #                      is_training=is_training,
+    #                      scope='conv1', bn_decay=bn_decay)
+    # net = tf_util.conv2d(net, 64, [1,1],
+    #                      padding='VALID', stride=[1,1],
+    #                      is_training=is_training,
+    #                      scope='conv2', bn_decay=bn_decay)
+
+    # with tf.variable_scope('transform_net2') as sc:
+    #     feature_transform = feature_transform_net(net, is_training, bn_decay, K=64)
+    # net_transformed = tf.matmul(tf.squeeze(net, axis=[2]), feature_transform)
+    # net_transformed = tf.expand_dims(net_transformed, [2])
+
+    # net = tf_util.conv2d(net_transformed, 64, [1,1],
+    #                      padding='VALID', stride=[1,1],
+    #                      is_training=is_training,
+    #                      scope='conv3', bn_decay=bn_decay)
+    # net = tf_util.conv2d(net, 128, [1,1],
+    #                      padding='VALID', stride=[1,1],
+    #                      is_training=is_training,
+    #                      scope='conv4', bn_decay=bn_decay)
+    # net = tf_util.conv2d(net, 1024, [1,1],
+    #                      padding='VALID', stride=[1,1],
+    #                      is_training=is_training,
+    #                      scope='conv5', bn_decay=bn_decay)
+    # ##################################################################################################
+
+    ###################### Way 4: change PointOE Module to PointNet++##########################
+    
+    ## TODO
+    ###########################################################################################
+
     _, c0_l0_points, _ = pointSIFT_module(point_cloud_xyz, None, radius=0.1, out_channel=64, is_training=is_training, bn_decay=bn_decay, scope='layer0_c0')
     net0 = tf_util.conv2d(c0_l0_points, 64, [1,1],
                          padding='VALID', stride=[1,1],
@@ -263,6 +302,11 @@ def vlad_forward(xyz, reshaped_input, feature_size=1024, max_samples=4096, clust
     reshaped_input_pointwise = attention_unit(input, is_training=is_training)
     
     reshaped_input = tf.reshape(reshaped_input_pointwise, [-1, feature_size])
+
+    # ###################### Way 2: remove attention ##########################
+    # reshaped_input = tf.reshape(input, [-1, feature_size])
+    # #########################################################################
+
     #msg grouping
  
     # print('m:', m)

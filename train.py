@@ -122,6 +122,11 @@ def train():
                 print(pos_vecs)
                 print(neg_vecs)
                 print(other_neg_vec)
+            # ###################### Way 1: Change Loss Function ######################
+            # MARGIN1 = 0.5
+            # MARGIN2 = 0.2
+            # loss = lazy_quadruplet_loss(q_vec, pos_vecs, neg_vecs, other_neg_vec, MARGIN1, MARGIN2)
+            # #########################################################################
             loss = HPHN_quadruplet_loss(q_vec, pos_vecs, neg_vecs, other_neg_vec, MARGIN)
             tf.summary.scalar('loss', loss)
 
